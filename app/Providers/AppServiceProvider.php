@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Storage\Catalogue;
+use App\Storage\Item;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,8 +30,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-//        $this->app->bind('Breadcrumbs', function ($app) {
-//            return new Breadcrumbs();
-//        });
+        $this->app->bind('storage.item', function () {
+            return new Item();
+        });
+        $this->app->bind('storage.catalogue', function () {
+            return new Catalogue();
+        });
     }
 }

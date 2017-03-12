@@ -3,7 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="referrer" content="origin">
-    <link rel="shortcut icon" href="https://toys.com.ua/favicon.ico">
     <meta name="description"
           content="Купить Черепашки Ниндзя в самом большом интернет магазине игрушек Toys - низкие цены, широкий ассортимент, доставка по Украине.">
     <meta name="keywords" content="Черепашки Ниндзя купить цена магазин детских игрушек">

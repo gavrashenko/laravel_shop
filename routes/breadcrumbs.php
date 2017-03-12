@@ -7,13 +7,17 @@ Breadcrumbs::register('home', function($breadcrumbs)
 
 Breadcrumbs::register('catalogue', function($breadcrumbs, $alias)
 {
+    $catalogue = resolve('storage.catalogue')->getCatalogueByAlias($alias);
     $breadcrumbs->parent('home');
-    $breadcrumbs->push($alias, route('catalogue', $alias));
+    $breadcrumbs->push($catalogue->name, route('catalogue', $alias));
 });
 
 Breadcrumbs::register('item', function($breadcrumbs, $catalogueAlias, $aliasAndId)
 {
+    $catalogue = resolve('storage.catalogue')->getCatalogueByAlias($catalogueAlias);
+    $item = resolve('storage.item')->getItemByAlias($aliasAndId);
+
     $breadcrumbs->parent('home');
-    $breadcrumbs->push($catalogueAlias, route('catalogue', $catalogueAlias));
-    $breadcrumbs->push($aliasAndId, route('item', compact(['catalogueAlias', 'aliasAndId'])));
+    $breadcrumbs->push($catalogue->name, route('catalogue', $catalogueAlias));
+    $breadcrumbs->push($item->name, route('item', compact(['catalogueAlias', 'aliasAndId'])));
 });
