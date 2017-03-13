@@ -10,7 +10,7 @@
         <td style="white-space:nowrap;color:#585858;font-size:18px;"><span
                 class="ui-spinner ui-widget ui-widget-content ui-corner-all"><input
                 class="quantity ui-spinner-input" type="text" v-model="count"
-                size="2" autocomplete="off"
+                size="2" autocomplete="off" readonly
                 role="spinbutton"><a
                 @click.prevent="increase"
                 class="ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default ui-button-text-only"

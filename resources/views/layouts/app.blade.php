@@ -85,10 +85,9 @@
             <div class="container" style="position:relative">
                 <div class="row">
                     <div class="span12 footer-bottom-text">
-                        Купить <a href="http://www.normas.com.ua/">детские игрушки</a> для мальчика и&nbsp;девочки в&nbsp;интернет
-                        магазине Toys.com.ua с&nbsp;доставкой по&nbsp;всей Украине.<br>
-                        Магазин игрушек Normas.com.ua принимает заказы в автоматическом режиме круглосуточно без
-                        выходных.<br>
+                        Купить <a href="http://www.normas.com.ua/">игрушки, фигурки, крадрокоптеры и многое другое</a> в&nbsp;интернет
+                        магазине Normas.com.ua с&nbsp;доставкой по Киеву и Украине.<br>
+                        Магазин Normas.com.ua это место которое заставляет вас улыбнуться ;) и это Нормас!.<br>
                         &copy; 2017 Normas.com.ua
                     </div>
                 </div>
@@ -108,10 +107,11 @@
 <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 <link href="{{ asset('css/jquery.fancybox.css') }}" rel="stylesheet">
 <script src="{{ asset('js/vendor/jquery.fancybox.min.js') }}"></script>
-{{--<script src="{{ asset('js/dist/build.js') }}"></script>--}}
+
 <script>
     var templateData = <?php echo json_encode(isset($templateData) ? $templateData : []); ?>;
 </script>
+{{--<script src="{{ asset('js/dist/build.js') }}"></script>--}}
 <script src="http://localhost:8080/dist/build.js"></script>
 
 </body>

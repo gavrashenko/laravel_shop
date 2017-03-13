@@ -10,7 +10,7 @@
             </div>
             <a :href="'/' + item.catalogue_alias + '/' + item.alias" class="title">{{item.name}}</a>
             <div class="price">{{item.price}}&nbsp;<span>грн.</span></div>
-            <button class="btn btn-warning addToCart" data-id="6825">Купить</button>
+            <button @click="buy" class="btn btn-warning addToCart">Купить</button>
 
         </div>
     </li>
@@ -18,7 +18,13 @@
 
 <script>
     export default {
-        props: ['item']
+        props: ['item'],
+
+        methods: {
+            buy () {
+                this.$store.commit('CART_ADD_ITEM', this.item)
+            }
+        }
     }
 </script>
 
