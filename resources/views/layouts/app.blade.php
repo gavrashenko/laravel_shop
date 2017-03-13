@@ -6,7 +6,7 @@
     <meta name="description"
           content="Купить Черепашки Ниндзя в самом большом интернет магазине игрушек Toys - низкие цены, широкий ассортимент, доставка по Украине.">
     <meta name="keywords" content="Черепашки Ниндзя купить цена магазин детских игрушек">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('css/site.css') }}" rel="stylesheet">
     <title>Normas</title>
 
@@ -102,11 +102,16 @@
 
     </footer>
 </div>
+<!--<editor-fold desc="Description">-->
 
+<!--</editor-fold>-->
 <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 <link href="{{ asset('css/jquery.fancybox.css') }}" rel="stylesheet">
 <script src="{{ asset('js/vendor/jquery.fancybox.min.js') }}"></script>
 {{--<script src="{{ asset('js/dist/build.js') }}"></script>--}}
+<script>
+    var templateData = <?php echo json_encode(isset($templateData) ? $templateData : []); ?>;
+</script>
 <script src="http://localhost:8080/dist/build.js"></script>
 
 </body>

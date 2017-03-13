@@ -36,10 +36,12 @@ SQL;
         }
 
         return view('catalogue.list', [
-            'showSorting' => false,
-            'categories' => $cats,
-            'items' => $items,
-            'categoryName' => 'Недавно добавленные игрушки',
+            'templateData' => [
+                'showSorting' => false,
+                'categories' => $cats,
+                'items' => $items,
+                'categoryName' => 'Недавно добавленные игрушки',
+            ]
         ]);
     }
 
@@ -65,11 +67,11 @@ SQL;
         }
 
         $items = DB::select('
-                        SELECT i.*, c.alias catalogue_alias 
-                        FROM item i, catalogue c
-                        WHERE i.id_catalogue=:id_catalogue
-                          AND c.id = i.id_catalogue
-                        ORDER BY i.id DESC', [
+            SELECT i.*, c.alias catalogue_alias 
+            FROM item i, catalogue c
+            WHERE i.id_catalogue=:id_catalogue
+              AND c.id = i.id_catalogue
+            ORDER BY i.id DESC', [
             'id_catalogue' => $catalogue->id
         ]);
 
@@ -86,12 +88,14 @@ SQL;
         }
 
         return view('catalogue.list', [
-            'showSorting' => true,
-            'categories' => $cats,
-            'items' => $items,
-            'itemsCount' => $itemsCount,
-            'categoryName' => $catalogue->name,
-            'catalogue' => $catalogue,
+            'templateData' => [
+                'showSorting' => true,
+                'categories' => $cats,
+                'items' => $items,
+                'itemsCount' => $itemsCount,
+                'categoryName' => $catalogue->name,
+                'catalogue' => $catalogue,
+            ],
         ]);
     }
 
@@ -104,11 +108,11 @@ SQL;
         }
 
         $item = DB::select('
-                      SELECT i.*, c.alias catalogue_alias
-                      FROM item i, catalogue c 
-                      WHERE i.id=:id 
-                        AND c.id = i.id_catalogue
-                        AND i.alias=:alias', [
+            SELECT i.*, c.alias catalogue_alias
+            FROM item i, catalogue c 
+            WHERE i.id=:id 
+                AND c.id = i.id_catalogue
+                AND i.alias=:alias', [
             'id' => (int)$res[2],
             'alias' => (int)$res[1],
         ]);
@@ -124,7 +128,7 @@ SQL;
             SELECT i.id, i.url, ii.is_primary
             FROM image i, item_image ii
             WHERE i.id = ii.id_image 
-              AND ii.id_item = :id_item
+                AND ii.id_item = :id_item
 SQL;
 
         $images = DB::select($sql, [
@@ -141,9 +145,11 @@ SQL;
         }
 
         return view('catalogue.item', [
-            'item' => $item,
-            'mainImage' => $mainImage,
-            'images' => $images,
+            'templateData' => [
+                'item' => $item,
+                'mainImage' => $mainImage,
+                'images' => $images,
+            ]
         ]);
     }
 }

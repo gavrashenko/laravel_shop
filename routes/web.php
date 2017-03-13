@@ -11,6 +11,10 @@
 |
 */
 
+use Illuminate\Http\Request;
+
+Route::post('/image/get-main-images', 'ImageController@getMainImages');
+
 Route::get('/', 'CatalogueController@showAll')->name('home');
 Route::get('/contacts', 'StaticPagesController@contacts')->name('contacts');
 Route::get('/delivery', 'StaticPagesController@delivery')->name('delivery');
