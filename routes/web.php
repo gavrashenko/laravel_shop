@@ -13,6 +13,7 @@
 
 Route::post('/image/get-main-images', 'ImageController@getMainImages');
 Route::get('/order', 'OrderController@showOrder')->name('show_order');
+Route::get('/order/{code}', 'OrderController@showPersonalOrder')->name('show_personal_order');
 Route::post('/order', 'OrderController@makeOrder')->name('make_order');
 Route::get('/', 'CatalogueController@showAll')->name('home');
 Route::get('/contacts', 'StaticPagesController@contacts')->name('contacts');

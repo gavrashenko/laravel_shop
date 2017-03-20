@@ -16,13 +16,47 @@ class OrderController extends Controller
         ]);
     }
 
+    public function showPersonalOrder($code)
+    {
+        list($idOrder, $hash) = explode('-', $code);
+
+        if ($idOrder === null
+            || $hash === null
+            || strlen($hash) !== 32
+        ) {
+            return response()->json([
+                'error' => 'Такой страницы нету :(',
+            ], 404);
+        } else {
+            $order = resolve('storage.order')->getOrderByIdHash((int)$idOrder, $hash);
+            if ($order === null) {
+                return response()->json([
+                    'error' => 'Такой заказ не найден!',
+                ], 400);
+            } else {
+                return view('order.personal-order', [
+                    'templateData' => [
+                        'order' => $order,
+                    ]
+                ]);
+            }
+        }
+    }
+
     public function makeOrder(Request $request)
     {
         $data = $request->all();
-        $idOrder = resolve('storage.order')->saveOrder($data);
+        $order = resolve('storage.order')->saveOrder($data);
 
-        return response()->json([
-            'idOrder' => $idOrder,
-        ]);
+        if ($order === null) {
+            return response()->json([
+                'error' => 'Произошла ошибка во время создания заказа, обновите страницу и попробуйте еще раз.',
+            ], 400);
+        } else {
+            return response()->json([
+                'idOrder' => $order->id,
+                'hash' => $order->hash,
+            ]);
+        }
     }
 }

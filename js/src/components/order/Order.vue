@@ -125,7 +125,9 @@
                         form: this.form,
                         items: this.$store.getters.cartItems
                     }).then(function (resp) {
-                        location.href = '/order/' + resp.idOrder;
+                        location.href = '/order/' + resp.idOrder + '-' + resp.hash;
+                    }).catch(function (resp) {
+                        alert(resp.body.error);
                     });
                 } else {
                     alert('Пожалуйста, исправьте поля с ошибками.')
@@ -145,8 +147,8 @@
                 },
                 user_phone: {
                     required,
-                    minLength: minLength(18),
-                    maxLength: maxLength(18)
+                    minLength: minLength(17),
+                    maxLength: maxLength(17)
                 },
                 user_email: {
                     required,

@@ -7,6 +7,7 @@
           content="Купить Черепашки Ниндзя в самом большом интернет магазине игрушек Toys - низкие цены, широкий ассортимент, доставка по Украине.">
     <meta name="keywords" content="Черепашки Ниндзя купить цена магазин детских игрушек">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="{{ asset('images/favicon.png') }}" rel="icon">
     <link href="{{ asset('css/site.css') }}" rel="stylesheet">
     <title>Normas</title>
 

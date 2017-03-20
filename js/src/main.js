@@ -7,6 +7,7 @@ import Cart from './components/cart/Cart.vue'
 import Catalogue from './components/catalogue/List.vue'
 import Item from './components/item/Item.vue'
 import Order from './components/order/Order.vue'
+import PersonalOrder from './components/order/PersonalOrder.vue'
 
 Vue.use(VueResource);
 Vue.use(Vuelidate);
@@ -34,6 +35,7 @@ new Vue({
         Cart,
         Catalogue,
         Item,
-        Order
+        Order,
+        PersonalOrder
     }
 });
