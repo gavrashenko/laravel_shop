@@ -80,7 +80,6 @@
             </div>
         </div>
         <OrderCart></OrderCart>
-
     </div>
 </template>
 
@@ -89,6 +88,7 @@
     import store from "../../store/index"
     import { validationMixin } from 'vuelidate'
     import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
+    import orderApi from "../../api/order-api"
 
     export default {
         mixins: [validationMixin],
@@ -112,17 +112,24 @@
 
         methods: {
             confirmOrder () {
-
                 this.$v.form.user_name.$touch();
                 this.$v.form.user_phone.$touch();
                 this.$v.form.user_email.$touch();
 
-                let isFormValid = !this.$v.form.user_name.$error;
-                isFormValid &= !this.$v.form.user_phone.$error;
-                isFormValid &= !this.$v.form.user_email.$error;
+                let isFormValid = !this.$v.form.user_name.$invalid;
+                isFormValid &= !this.$v.form.user_phone.$invalid;
+                isFormValid &= !this.$v.form.user_email.$invalid;
 
-                alert(!!isFormValid);
-
+                if (!!isFormValid) {
+                    orderApi.saveOrder({
+                        form: this.form,
+                        items: this.$store.getters.cartItems
+                    }).then(function (resp) {
+                        location.href = '/order/' + resp.idOrder;
+                    });
+                } else {
+                    alert('Пожалуйста, исправьте поля с ошибками.')
+                }
             }
         },
 

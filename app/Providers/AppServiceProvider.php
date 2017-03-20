@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Storage\Catalogue;
 use App\Storage\Item;
+use App\Storage\Order;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -35,6 +36,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind('storage.catalogue', function () {
             return new Catalogue();
+        });
+        $this->app->bind('storage.order', function () {
+            return new Order();
         });
     }
 }

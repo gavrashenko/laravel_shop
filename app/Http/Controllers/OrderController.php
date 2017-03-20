@@ -15,4 +15,14 @@ class OrderController extends Controller
             ]
         ]);
     }
+
+    public function makeOrder(Request $request)
+    {
+        $data = $request->all();
+        $idOrder = resolve('storage.order')->saveOrder($data);
+
+        return response()->json([
+            'idOrder' => $idOrder,
+        ]);
+    }
 }
