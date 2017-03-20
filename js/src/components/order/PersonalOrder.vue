@@ -38,8 +38,32 @@
 
             <div class="order-title">Товары которые вы купили:</div>
 
-            <p>sdfsdf</p>
-
+            <table>
+                <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Название</th>
+                    <th>Кол-во</th>
+                    <th>Цена</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in items">
+                    <td><img style="width: 200px;"
+                             :src="'/images/items/' + item.main_image.url"
+                             :alt="item.name"></td>
+                    <td><a target="_blank" :href="'/' + item.catalogue_alias + '/' + item.alias">{{item.name}}</a></td>
+                    <td>{{item.order_count}}шт</td>
+                    <td>{{item.order_price}}грн</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td style="text-align: right" colspan="3">Итого:</td>
+                    <td><b>{{orderPrice}}грн</b></td>
+                </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 </template>
@@ -50,13 +74,21 @@
 
     export default {
         store,
-        props: ['order'],
+        props: ['data'],
 
         data () {
             return {}
         },
 
         computed: {
+            order () {
+                return this.data.order;
+            },
+
+            items () {
+                return this.data.items;
+            },
+
             delivery () {
                 switch (this.order.delivery_type) {
                     case 1:
@@ -88,6 +120,10 @@
                     default:
                         return 'Ошибка.';
                 }
+            },
+
+            orderPrice () {
+                return _.sumBy(this.items, item => item.order_price * item.order_count);
             }
         },
 

@@ -38,4 +38,34 @@ class Item
         return $res;
     }
 
+    public function getItemsByOrderId($idOrder)
+    {
+        $items = DB::table(self::TABLE)
+            ->selectRaw('item.*, catalogue.alias catalogue_alias, item_order.count order_count, item_order.price order_price')
+            ->join('catalogue', 'item.id_catalogue', '=', 'catalogue.id')
+            ->join('item_order', 'item_order.id_item', '=', 'item.id')
+            ->where('item_order.id_order', '=', (int)$idOrder)
+            ->orderBy('item.id', 'asc')
+            ->get();
+
+        if (!$items) {
+            return [];
+        }
+
+        $itemIds = [];
+        foreach ($items as $item) {
+            $itemIds[] = $item->id;
+        }
+
+        $images = $this->getItemMainImages($itemIds);
+        foreach ($items as &$item) {
+            if (isset($images[$item->id])) {
+                $item->main_image = $images[$item->id];
+            } else {
+                $item->main_image = null;
+            }
+        }
+
+        return $items;
+    }
 }

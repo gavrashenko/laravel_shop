@@ -34,9 +34,12 @@ class OrderController extends Controller
                     'error' => 'Такой заказ не найден!',
                 ], 400);
             } else {
+                $items = resolve('storage.item')->getItemsByOrderId($order->id);
+
                 return view('order.personal-order', [
                     'templateData' => [
                         'order' => $order,
+                        'items' => $items,
                     ]
                 ]);
             }

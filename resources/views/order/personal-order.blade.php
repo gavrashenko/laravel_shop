@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('content')
-        <personal-order :order="templateData.order"></personal-order>
+        <personal-order :data="templateData"></personal-order>
 @endsection
