@@ -33,7 +33,7 @@
 
         methods: {
             increase () {
-                if (this.count < 10) {
+                if (this.count < 9) {
                     this.count++;
                     this.$store.commit('CART_SET_ITEMS_COUNT', {
                         item: this.item,

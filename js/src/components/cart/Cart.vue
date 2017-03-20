@@ -11,7 +11,7 @@
 
         <div v-if="isModalVisible">
             <div @click="closeCart" class="modal-backdrop  in"></div>
-            <div @click.prevent id="cartModal" class="modal hide in" aria-hidden="false" style="display: block;">
+            <div id="cartModal" class="modal hide in" aria-hidden="false" style="display: block;">
                 <div class="modal-header"><a @click.prevent="closeCart" class="close">×</a>
                     <h1>Я ваша корзинка с игрушками ;)</h1></div>
                 <div class="modal-body">
@@ -30,7 +30,7 @@
                             id="total" class="orange-price" style="font-size:24px;">{{price}}</span><span class="orange-price"
                                                                                                     style="font-size:14px;">&nbsp;грн.</span>
                     </div>
-                    <a href="/order" class="btn btn-large btn-warning" id="btnMakeOrder">Оформить заказ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a @click.prevent="closeCart" href="#" data-dismiss="modal" style="text-decoration:underline;">Продолжить покупки</a><br><br></div>
+                    <a href="/order" class="btn btn-large btn-warning">Оформить заказ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a @click.prevent="closeCart" href="#" data-dismiss="modal" style="text-decoration:underline;">Продолжить покупки</a><br><br></div>
 
             </div>
         </div>
@@ -62,7 +62,7 @@
 
             items () {
                 return this.$store.getters.cartItems;
-            },
+            }
         },
 
         methods: {

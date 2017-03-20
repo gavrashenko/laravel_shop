@@ -1814,7 +1814,7 @@ input[type="button"].btn-block {
   background-color: #32415f \9;
 }
 .btn-warning {
-  background: #51a351;
+  background: #ff6900;
 }
 .btn-warning:hover {
   background: #57b957;
@@ -4395,7 +4395,7 @@ ul.list li li:before {
   font-size: 40px;
 }
 .order-form {
-  background: #ccff99;
+  background: rgb(218, 244, 255);
   border-radius: 5px;
   margin: 0 0 20px 0;
   padding: 15px;
@@ -4865,7 +4865,7 @@ ul.nav-catalog li ul li.level-2 a.active {
 .itemQuantity {
   display: table-cell;
   vertical-align: middle;
-  width: 40px !important;
+  width: 40px;
   height: 40px !important;
   padding: 0px 20px 0 10px !important;
   margin: 0 !important;
