@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 
+        Skovmand\Mailchimp\MailchimpServiceProvider::class,
     ],
 
     /*

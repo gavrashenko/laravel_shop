@@ -19,6 +19,7 @@ Route::get('/', 'CatalogueController@showAll')->name('home');
 Route::get('/contacts', 'StaticPagesController@contacts')->name('contacts');
 Route::get('/delivery', 'StaticPagesController@delivery')->name('delivery');
 Route::get('/about', 'StaticPagesController@about')->name('about');
+Route::get('/test', 'CatalogueController@test')->name('test');
 Route::get('{catalogueAlias}', 'CatalogueController@showCatalogue')->name('catalogue');
 Route::get('{catalogueAlias}/{itemAlias}', 'CatalogueController@showItem')->name('item');
 

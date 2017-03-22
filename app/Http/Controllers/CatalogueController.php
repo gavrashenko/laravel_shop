@@ -6,8 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 
+
+
 class CatalogueController extends Controller
 {
+    public $mailchimp;
+
+    public function __construct(\Mailchimp $mailchimp)
+    {
+        $this->mailchimp = $mailchimp;
+    }
+
     public function showAll()
     {
         $cats = DB::select('SELECT * FROM catalogue ORDER BY `order` ASC');
@@ -151,5 +160,55 @@ SQL;
                 'images' => $images,
             ]
         ]);
+    }
+
+    public function test()
+    {
+        echo "<pre>";
+        $listId = '69cc4edc88';
+
+        try {
+//            $res = $this->mailchimp
+//                ->lists
+//                ->subscribe(
+//                    $listId,
+//                    [
+//                        'email' => 'gavrashenko@gmail.com'
+//                    ],
+//                    null,
+//                    'html',
+//                    false
+//                );
+//
+//            print_r($res);
+
+
+            $options = [
+                'list_id'   => $listId,
+                'subject' => "Ваш заказ Нормас",
+                'from_name' => "Нормас",
+                'from_email' => 'noreply@normas.com.ua',
+                'to_name' => 'gavrashenko@gmail.com'
+            ];
+
+            $content = [
+                'html' => "<h1>Спасибо за Ваш заказ</h1>",
+                'text' => "Спасибо за Ваш заказ"
+            ];
+
+            $campaign = $this->mailchimp->campaigns->create('regular', $options, $content);
+
+
+            print_r($campaign);
+
+            $res = $this->mailchimp->campaigns->send($campaign['id']);
+
+            print_r($res);
+
+        } catch (\Mailchimp_List_AlreadySubscribed $e) {
+            print_r($e->getMessage());
+        } catch (\Mailchimp_Error $e) {
+            print_r($e->getMessage());
+        }
     }
 }
