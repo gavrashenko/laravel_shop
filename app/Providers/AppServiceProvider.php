@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\MailService;
 use App\Storage\Catalogue;
 use App\Storage\Item;
 use App\Storage\Order;
@@ -39,6 +40,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind('storage.order', function () {
             return new Order();
+        });
+        $this->app->bind('mail.service', function () {
+            return new MailService();
         });
     }
 }

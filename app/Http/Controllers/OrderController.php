@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\MailService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public $mailchimp;
+
+    public function __construct(\Mailchimp $mailchimp)
+    {
+        $this->mailchimp = $mailchimp;
+    }
+
     public function showOrder(Request $request)
     {
         return view('order.order', [
@@ -55,11 +63,32 @@ class OrderController extends Controller
             return response()->json([
                 'error' => 'Произошла ошибка во время создания заказа, обновите страницу и попробуйте еще раз.',
             ], 400);
-        } else {
-            return response()->json([
-                'idOrder' => $order->id,
-                'hash' => $order->hash,
-            ]);
         }
+
+        /** @var MailService $mail */
+        $mail = resolve('mail.service');
+        $mail->sendOrderCreated($this->mailchimp, $order);
+
+        return response()->json([
+            'idOrder' => $order->id,
+            'hash' => $order->hash,
+        ]);
+    }
+
+    public function makeQuickOrder(Request $request)
+    {
+        $data = $request->all();
+        $order = resolve('storage.order')->saveQuickOrder($data);
+
+        if ($order === null) {
+            return response()->json([
+                'error' => 'Произошла ошибка во время создания заказа, обновите страницу и попробуйте еще раз.',
+            ], 400);
+        }
+
+        return response()->json([
+            'idOrder' => $order->id,
+            'hash' => $order->hash,
+        ]);
     }
 }

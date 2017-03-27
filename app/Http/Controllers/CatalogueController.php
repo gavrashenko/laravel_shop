@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderCreated;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Mail;
 
 
 class CatalogueController extends Controller
@@ -164,11 +165,23 @@ SQL;
 
     public function test()
     {
-        echo "<pre>";
-        $listId = '69cc4edc88';
+//        echo "<pre>";
 
-        try {
-//            $res = $this->mailchimp
+
+
+
+
+//        return view('emails.order-created');
+
+
+
+
+//        $listId = '69cc4edc88';
+//        try {
+//            Mail::to('gavrashenko@gmail.com')
+//                ->send(new OrderCreated([]));
+//
+//            $this->mailchimp
 //                ->lists
 //                ->subscribe(
 //                    $listId,
@@ -180,35 +193,9 @@ SQL;
 //                    false
 //                );
 //
-//            print_r($res);
-
-
-            $options = [
-                'list_id'   => $listId,
-                'subject' => "Ваш заказ Нормас",
-                'from_name' => "Нормас",
-                'from_email' => 'noreply@normas.com.ua',
-                'to_name' => 'gavrashenko@gmail.com'
-            ];
-
-            $content = [
-                'html' => "<h1>Спасибо за Ваш заказ</h1>",
-                'text' => "Спасибо за Ваш заказ"
-            ];
-
-            $campaign = $this->mailchimp->campaigns->create('regular', $options, $content);
-
-
-            print_r($campaign);
-
-            $res = $this->mailchimp->campaigns->send($campaign['id']);
-
-            print_r($res);
-
-        } catch (\Mailchimp_List_AlreadySubscribed $e) {
-            print_r($e->getMessage());
-        } catch (\Mailchimp_Error $e) {
-            print_r($e->getMessage());
-        }
+//        } catch (\Mailchimp_List_AlreadySubscribed $e) {
+//        } catch (\Mailchimp_Error $e) {
+//        } catch (\Throwable $e) {
+//        }
     }
 }

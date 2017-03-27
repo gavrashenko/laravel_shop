@@ -13,7 +13,8 @@
             <div @click="closeCart" class="modal-backdrop  in"></div>
             <div id="cartModal" class="modal hide in" aria-hidden="false" style="display: block;">
                 <div class="modal-header"><a @click.prevent="closeCart" class="close">×</a>
-                    <h1>Я ваша корзинка с игрушками ;)</h1></div>
+                    <h1>Я ваша корзинка с игрушками ;)</h1>
+                </div>
                 <div class="modal-body">
                     <table>
                         <tbody>
@@ -62,6 +63,10 @@
 
             items () {
                 return this.$store.getters.cartItems;
+            },
+
+            changeVisible () {
+                return this.$store.getters.changeVisible;
             }
         },
 
@@ -79,6 +84,12 @@
             closeCart () {
                 this.isModalVisible = false;
             },
+        },
+
+        watch: {
+            changeVisible () {
+                this.openCart();
+            }
         },
 
         components: {

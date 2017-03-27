@@ -2,7 +2,7 @@
     <tr>
         <td width="140" class="img"><img
                 :src="'/images/items/' + mainImage.url"
-                alt="Оружие Черепашек-ниндзя «Нунчаки Микеланджело»"></td>
+                :alt="item.name"></td>
         <td class="title">
             <h3>{{item.name}}</h3>
             <div class="price"><span>{{item.price}}</span>&nbsp;грн.</div>

@@ -43,6 +43,39 @@ class Order
         return $order;
     }
 
+    public function saveQuickOrder($data)
+    {
+        /** @var Item $itemStorage */
+        $itemStorage = resolve('storage.item');
+        $item = $itemStorage->getItemById($data['id_item']);
+        if (!$item) {
+            return null;
+        }
+
+        return $this->saveOrder([
+            'form' => [
+                'user_name' => '',
+                'user_email' => '',
+                'user_phone' => $data['form']['user_phone'],
+                'delivery_type' => 0,
+                'delivery_city' => '',
+                'delivery_address' => '',
+                'delivery_comment' => 'Быстрый заказ, нужно позвонить клиенту',
+                'payment_type' => 0,
+                'hash' => md5(mt_rand()),
+            ],
+            'items' => [
+                [
+                    'id' => $item->id,
+                    'count' => 1,
+                    'item' => [
+                        'price' => $item->price
+                    ],
+                ]
+            ]
+        ]);
+    }
+
     public function getOrderById($idOrder)
     {
         return DB::table(self::TABLE)

@@ -15,8 +15,8 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
+        'domain' => env('normas.com.ua'),
+        'secret' => env('key-502849263b33a20604f44ee00567ad27'),
     ],
 
     'ses' => [

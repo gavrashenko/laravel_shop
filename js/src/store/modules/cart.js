@@ -2,7 +2,8 @@ import _ from "lodash"
 
 export default {
     state: {
-        items: []
+        items: [],
+        changeVisible: false
     },
 
     getters: {
@@ -16,14 +17,13 @@ export default {
 
         cartTotalPrice (state) {
             return _.sumBy(state.items, (i) => i.item.price * i.count);
-        }
-    },
+        },
 
-    // actions: {
-    //     cartAdd (store, item) {
-    //         store.commit('CART_ADD_ITEM', item)
-    //     }
-    // },
+        changeVisible (state) {
+            return state.changeVisible;
+        }
+
+    },
 
     mutations: {
         CART_ADD_ITEM (state, item) {
@@ -55,6 +55,10 @@ export default {
             if (found !== undefined) {
                 found.count = count;
             }
+        },
+
+        CART_OPEN (state) {
+            state.changeVisible = !state.changeVisible;
         }
     }
 }

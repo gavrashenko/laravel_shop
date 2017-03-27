@@ -22,7 +22,8 @@
 
         methods: {
             buy () {
-                this.$store.commit('CART_ADD_ITEM', this.item)
+                this.$store.commit('CART_ADD_ITEM', this.item);
+                this.$store.commit('CART_OPEN');
             }
         }
     }

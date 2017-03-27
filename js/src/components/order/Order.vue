@@ -2,7 +2,7 @@
     <div class="row order">
         <div class="span6"><h1>Оформить заказ</h1>
             <div class="order-form">
-                <div class="title">Покупатель <span href="#" class="clear-data">Очистить данные покупателя</span></div>
+                <!--<div class="title">Покупатель <span href="#" class="clear-data">Очистить данные покупателя</span></div>-->
                 <br>
 
                 <label for="Order_first_name" class="required">Имя</label>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="order-form">
-                <div class="title">Доставка <span href="#" class="clear-data">Очистить данные доставки</span></div>
+                <!--<div class="title">Доставка <span href="#" class="clear-data">Очистить данные доставки</span></div>-->
                 <br>
                 <div id="Order_shipping_type_block">
 

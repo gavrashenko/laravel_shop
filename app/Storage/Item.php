@@ -8,6 +8,14 @@ class Item
 {
     const TABLE = 'item';
 
+    public function getItemById($idItem)
+    {
+        return DB::table(self::TABLE)
+            ->select('*')
+            ->where('id', '=', (int)$idItem)
+            ->first();
+    }
+
     public function getItemByAlias($alias)
     {
         return DB::table(self::TABLE)
@@ -53,8 +61,8 @@ class Item
         }
 
         $itemIds = [];
-        foreach ($items as $item) {
-            $itemIds[] = $item->id;
+        foreach ($items as $it) {
+            $itemIds[] = $it->id;
         }
 
         $images = $this->getItemMainImages($itemIds);

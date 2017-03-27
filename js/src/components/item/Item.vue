@@ -42,7 +42,7 @@
                                 style="padding:15px 30px;font-size: 24px;margin:5px 0; width:100%">Купить
                         </button>
                         <br>
-                        <button class="buy1Click btn">Купить в 1 клик</button>
+                        <quick-order :data="data"></quick-order>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -83,13 +83,20 @@
 </template>
 
 <script>
+    import QuickOrder from "../order/QuickOrder.vue"
+
     export default {
         props: ['data'],
 
         methods: {
             buy () {
-                this.$store.commit('CART_ADD_ITEM', this.data.item)
+                this.$store.commit('CART_ADD_ITEM', this.data.item);
+                this.$store.commit('CART_OPEN');
             }
+        },
+
+        components: {
+            QuickOrder
         }
     }
 </script>
