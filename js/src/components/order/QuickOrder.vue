@@ -68,6 +68,7 @@
 
         methods: {
             open () {
+                this.isOrdered = false;
                 this.isModalVisible = true;
             },
 
