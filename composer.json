@@ -9,6 +9,7 @@
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
         "guzzlehttp/guzzle": "^6.2",
         "laravel/framework": "5.4.*",
+        "laravel/passport": "^2.0",
         "laravel/tinker": "~1.0",
         "skovmand/mailchimp-laravel": "^1.0"
     },

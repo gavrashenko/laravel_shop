@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
+    public function index(Request $request)
+    {
+        return view('layouts.admin');
+    }
+
     public function item(Request $request)
     {
         $result = $request->session()->all();

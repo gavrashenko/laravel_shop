@@ -8,10 +8,28 @@ import Catalogue from './components/catalogue/List.vue'
 import Item from './components/item/Item.vue'
 import Order from './components/order/Order.vue'
 import PersonalOrder from './components/order/PersonalOrder.vue'
+// import PassportClients from './components/passport/Clients.vue'
+// import PassportAuthorizedClients from './components/passport/AuthorizedClients.vue'
+// import PassportPersonalAccessTokens from './components/passport/PersonalAccessTokens.vue'
 
 Vue.use(VueResource);
 Vue.use(Vuelidate);
 Vue.use(VueMask);
+
+// Vue.component(
+//     'passport-clients',
+//     PassportClients
+// );
+//
+// Vue.component(
+//     'passport-authorized-clients',
+//     PassportAuthorizedClients
+// );
+//
+// Vue.component(
+//     'passport-personal-access-tokens',
+//     PassportPersonalAccessTokens
+// );
 
 Vue.http.interceptors.push(function(request, next) {
     if (request.method === 'POST') {

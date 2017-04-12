@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('admin4k', 'AdminController@index');
+//Route::get('admin4k/item', 'AdminController@item');
+//Route::post('admin4k/item', 'AdminController@addItem');
+
 Route::post('/image/get-main-images', 'ImageController@getMainImages');
 Route::get('/order', 'OrderController@showOrder')->name('show_order');
 Route::get('/order/{code}', 'OrderController@showPersonalOrder')->name('show_personal_order');
@@ -24,5 +28,4 @@ Route::get('/test', 'CatalogueController@test')->name('test');
 Route::get('{catalogueAlias}', 'CatalogueController@showCatalogue')->name('catalogue');
 Route::get('{catalogueAlias}/{itemAlias}', 'CatalogueController@showItem')->name('item');
 
-Route::get('admin4k/item', 'AdminController@item');
-Route::post('admin4k/item', 'AdminController@addItem');
+

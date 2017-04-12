@@ -179,6 +179,8 @@ return [
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 
         Skovmand\Mailchimp\MailchimpServiceProvider::class,
+
+        Laravel\Passport\PassportServiceProvider::class,
     ],
 
     /*
