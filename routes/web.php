@@ -12,6 +12,7 @@
 */
 
 Route::get('admin4k', 'AdminController@index');
+Route::get('admin4k/order/all', 'AdminController@allOrders')->name('all_orders');
 //Route::get('admin4k/item', 'AdminController@item');
 //Route::post('admin4k/item', 'AdminController@addItem');
 

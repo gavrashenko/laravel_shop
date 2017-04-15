@@ -84,6 +84,14 @@ class Order
             ->first();
     }
 
+    public function getAllOrders()
+    {
+        return DB::table(self::TABLE)
+            ->select('*')
+            ->orderBy('id', 'desc')
+            ->get();
+    }
+
     public function getOrderByIdHash($idOrder, $hash)
     {
         return DB::table(self::TABLE)

@@ -117,6 +117,12 @@
                 switch (this.order.status) {
                     case 0:
                         return 'Проверяется.';
+                    case 1:
+                        return 'Доставляется.';
+                    case 2:
+                        return 'Завершено.';
+                    case 3:
+                        return 'Отменено.';
                     default:
                         return 'Ошибка.';
                 }

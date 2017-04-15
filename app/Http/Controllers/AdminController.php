@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Storage\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,6 +11,17 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         return view('layouts.admin');
+    }
+
+    public function allOrders(Request $request)
+    {
+        /** @var Order $orderStorage */
+        $orderStorage = resolve('storage.order');
+        $orders = $orderStorage->getAllOrders();
+
+        return response()->json([
+            'orders' => $orders,
+        ]);
     }
 
     public function item(Request $request)
