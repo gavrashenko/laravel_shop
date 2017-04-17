@@ -13,8 +13,8 @@
 
 Route::get('admin4k', 'AdminController@index');
 Route::get('admin4k/order/all', 'AdminController@allOrders')->name('all_orders');
-//Route::get('admin4k/item', 'AdminController@item');
-//Route::post('admin4k/item', 'AdminController@addItem');
+Route::get('admin4k/catalogue/all', 'AdminController@allCatalogues')->name('all_catalogues');
+Route::get('admin4k/catalogue/items/{alias}', 'AdminController@catalogueItems')->name('catalogue_items');
 
 Route::post('/image/get-main-images', 'ImageController@getMainImages');
 Route::get('/order', 'OrderController@showOrder')->name('show_order');

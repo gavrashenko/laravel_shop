@@ -1,5 +1,5 @@
 <template>
-   <div class="order">
+   <div class="order container-fluid">
        <h1>Заказы: </h1>
        <table class="table">
            <thead>

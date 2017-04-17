@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OrderCreated;
+use App\Storage\Image;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
@@ -141,9 +142,9 @@ SQL;
                 AND ii.id_item = :id_item
 SQL;
 
-        $images = DB::select($sql, [
-            'id_item' => $item->id,
-        ]);
+        /** @var Image $imageStorage */
+        $imageStorage = resolve('storage.image');
+        $images = $imageStorage->getImagesByItemId($item->id);
 
         $mainImage = null;
         for ($i = 0, $l = count($images) ; $i < $l ; $i++) {

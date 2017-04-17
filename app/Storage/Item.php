@@ -76,4 +76,34 @@ class Item
 
         return $items;
     }
+
+    public function getItemsByCatalogueAlias($catalogueAlias)
+    {
+        $items = DB::table(self::TABLE)
+            ->selectRaw('item.*, catalogue.alias catalogue_alias')
+            ->join('catalogue', 'item.id_catalogue', '=', 'catalogue.id')
+            ->where('catalogue.alias', '=', $catalogueAlias)
+            ->orderBy('item.id', 'desc')
+            ->get();
+
+        if (!$items) {
+            return [];
+        }
+
+        $itemIds = [];
+        foreach ($items as $it) {
+            $itemIds[] = $it->id;
+        }
+
+        $images = $this->getItemMainImages($itemIds);
+        foreach ($items as &$item) {
+            if (isset($images[$item->id])) {
+                $item->main_image = $images[$item->id];
+            } else {
+                $item->main_image = null;
+            }
+        }
+
+        return $items;
+    }
 }

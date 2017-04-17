@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Storage\Catalogue;
+use App\Storage\Image;
+use App\Storage\Item;
 use App\Storage\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +16,7 @@ class AdminController extends Controller
         return view('layouts.admin');
     }
 
-    public function allOrders(Request $request)
+    public function allOrders()
     {
         /** @var Order $orderStorage */
         $orderStorage = resolve('storage.order');
@@ -21,6 +24,35 @@ class AdminController extends Controller
 
         return response()->json([
             'orders' => $orders,
+        ]);
+    }
+
+    public function allCatalogues()
+    {
+        /** @var Catalogue $catalogueStorage */
+        $catalogueStorage = resolve('storage.catalogue');
+        $catalogues = $catalogueStorage->getAllCatalogues();
+
+        return response()->json([
+            'catalogues' => $catalogues,
+        ]);
+    }
+
+    public function catalogueItems($alias)
+    {
+        /** @var Item $itemStorage */
+        $itemStorage = resolve('storage.item');
+        $items = $itemStorage->getItemsByCatalogueAlias($alias);
+
+        foreach ($items as &$item) {
+            /** @var Image $imageStorage */
+            $imageStorage = resolve('storage.image');
+            $images = $imageStorage->getImagesByItemId($item->id);
+            $item->images = $images;
+        }
+
+        return response()->json([
+            'items' => $items,
         ]);
     }
 

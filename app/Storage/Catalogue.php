@@ -15,4 +15,11 @@ class Catalogue
             ->where('alias', '=', $alias)
             ->first();
     }
+
+    public function getAllCatalogues()
+    {
+        return DB::table(self::TABLE)
+            ->select('*')
+            ->get();
+    }
 }
