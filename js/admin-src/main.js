@@ -54,6 +54,7 @@ new Vue({
             <router-view></router-view>
         </div>
     `,
+
     data () {
         return {
             active: 'orders'

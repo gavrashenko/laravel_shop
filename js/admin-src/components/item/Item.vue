@@ -16,7 +16,14 @@
                 </ul>
             </div>
             <div class="col-md-10">
-                {{items}}
+                <table class="table table-striped">
+                    <tbody>
+                        <tr v-for="item in items" is="Item" :item="item" @edit="editItem">
+                        </tr>
+                    </tbody>
+                </table>
+                <pre>{{items[0]}}</pre>
+                <Modal :item="modalItem" :is-visible="isModalVisible" @close="closeModal"></Modal>
             </div>
         </div>
     </div>
@@ -25,19 +32,33 @@
 <script>
     import catalogueApi from "../../api/catalogue-api"
     import itemApi from "../../api/item-api"
+    import Item from "./ItemItem.vue"
+    import Modal from "./Modal.vue"
 
     export default {
         data () {
             return {
                 catalogues: null,
                 selected: null,
-                items: []
+                items: [],
+                modalItem: null,
+                isModalVisible: false
             }
         },
 
         methods: {
             setCatalogue (catalogue) {
                 this.selected = catalogue;
+            },
+
+            editItem (item) {
+                this.modalItem = item;
+                this.isModalVisible = true;
+            },
+
+            closeModal () {
+                this.modalItem = null;
+                this.isModalVisible = false;
             }
         },
 
@@ -57,5 +78,10 @@
                 })
             })
         },
+
+        components: {
+            Item,
+            Modal
+        }
     }
 </script>
