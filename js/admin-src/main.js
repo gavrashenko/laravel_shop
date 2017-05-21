@@ -7,10 +7,9 @@ import Item from "./components/item/Item.vue"
 
 Vue.use(VueResource);
 Vue.use(VueRouter);
-
 Vue.http.interceptors.push(function(request, next) {
     if (request.method === 'POST') {
-        request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+        request.headers.set('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
     }
     next();
 });

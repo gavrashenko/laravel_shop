@@ -8,7 +8,7 @@ class Image
 {
     public function getImagesByItemId($idItem) {
         $sql = <<<SQL
-            SELECT i.id, i.url, ii.is_primary
+            SELECT i.id, i.url, i.url_200, ii.is_primary
             FROM image i, item_image ii
             WHERE i.id = ii.id_image 
                 AND ii.id_item = :id_item

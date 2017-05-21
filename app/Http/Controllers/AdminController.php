@@ -66,6 +66,12 @@ class AdminController extends Controller
         ]);
     }
 
+    public function saveItem(Request $request)
+    {
+        print_r($request->request->all());
+        print_r($_FILES);exit;
+    }
+
     public function addItem(Request $request)
     {
         echo '<pre>';

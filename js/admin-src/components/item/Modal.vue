@@ -39,17 +39,21 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="item-main-image">Главная картинка</label>
+                            <label for="item-main-image">Главная картинка {{form.images[1]}}</label>
                             <img v-if="!isNew" :src="'/images/items/' + form.main_image.url_200" width="100">
                             <input type="file" id="item-main-image">
                             <p class="help-block">Эта картинка будет первой отображаться на сайте.</p>
                         </div>
 
-                        <p>Дополнительные картинки:</p>
+                        <p>Дополнительные картинки: (<a @click.prevent="addMorePhotos" href="#">еще</a>)</p>
+
+                        <div v-for="n in newImagesCount">
+                            <input type="file" class="item-new-image">
+                        </div>
 
                         <div v-if="!isNew" class="form-group" v-for="image in form.images">
                             <img v-if="!isNew" :src="'/images/items/' + image.url" width="100">
-                            <input type="file"> <a href="#">удалить</a>
+                            <a href="#">удалить</a>
                             <br>
                         </div>
 
@@ -57,7 +61,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
-                    <button type="button" class="btn btn-primary">Сохранить изменения</button>
+                    <button @click="save" type="button" class="btn btn-primary">Сохранить изменения</button>
                 </div>
             </div>
         </div>
@@ -67,13 +71,15 @@
 <script>
     import Vue from 'vue'
     import _ from 'lodash'
+    import itemApi from '../../api/item-api'
 
     export default {
         props: ['item', 'isVisible'],
 
         data () {
             return {
-                form: null
+                form: null,
+                newImagesCount: 1
             }
         },
 
@@ -82,6 +88,32 @@
                 return {
                     name: ''
                 };
+            },
+
+            addMorePhotos () {
+                this.newImagesCount++;
+            },
+
+            save () {
+                let data = new FormData();
+                $('.item-new-image').each((i, image) => {
+                    for (let j in image.files) {
+                        data.append('files[]', image.files[j]);
+                    }
+                });
+                $('#item-main-image').each((i, image) => {
+                    for (let j in image.files) {
+                        data.append('main', image.files[j]);
+                    }
+                });
+
+                for (let i in this.form) {
+                    data.append(i, this.form[i]);
+                }
+
+                itemApi.saveItem(data).then(() => {
+                    debugger
+                });
             }
         },
 
